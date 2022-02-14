@@ -1,0 +1,46 @@
+version: "3.8"
+
+services:
+
+  web:
+    build: "./web"
+    working_dir: /app
+    command: "sh -c 'npm install && npm run dev -- --host'"
+    volumes:
+      - ./web:/app
+    ports:
+      - "3000:3000"
+      - "24678:24678"
+
+  cms:
+    image: strapi/strapi
+    environment:
+      DATABASE_CLIENT: postgres
+      DATABASE_NAME: strapi
+      DATABASE_HOST: db
+      DATABASE_PORT: 5432
+      DATABASE_USERNAME: strapi
+      DATABASE_PASSWORD: strapi    
+    volumes:
+      - ./cms:/srv/app
+    ports:
+      - "1337:1337"
+    depends_on:
+      - db
+
+  db:
+    image: postgres
+    environment:
+      POSTGRES_DB: strapi
+      POSTGRES_USER: strapi
+      POSTGRES_PASSWORD: strapi
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin@example.org
+      PGADMIN_DEFAULT_PASSWORD: strapi
+    ports:
+      - "5050:80"
