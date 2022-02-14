@@ -12,3 +12,14 @@ git init
 docker-compose up -d
 ```
 This will copy the contents of the repo and initialize it as a new git project, ditching all history etc.
+
+## Strapi admin account
+https://github.com/sunnysonx/strapi-plugin-bootstrap-admin-user
+This plugin is used to create a default admin user (for development), with these credentials:
+```
+Username: admin  
+Password: admin  
+Firstname: Admin  
+Lastname: Admin  
+Email: admin@strapi.dev
+```
