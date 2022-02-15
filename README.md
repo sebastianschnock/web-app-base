@@ -23,3 +23,6 @@ Firstname: Admin
 Lastname: Admin  
 Email: admin@strapi.dev
 ```
+
+# Notes
+You might need to rename the container names in the `docker-compose.yml` to avoid duplicate container names.
